@@ -4,40 +4,40 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class StudentController extends Controller
+class TeacherController extends Controller
 {
     public function index()
     {
-        return "Displaying student list";
+        return "Displaying teacher list";
     }
 
     public function create()
     {
-        return "Displaying student create form";
+        return "Displaying teacher create form";
     }
     
         public function store()
     {
-        return "Storing new student";
+        return "Storing new teacher";
     }
 
         public function show($id)
     {
-        return "Displaying student with ID: $id";
+        return "Displaying teacher with ID: $id";
     }
 
         public function edit($id)
     {
-        return "Displaying student edit form with ID: $id";
+        return "Displaying teacher edit form with ID: $id";
     }
 
         public function update($id)
     {
-        return "Updating student with ID: $id";
+        return "Updating teacher with ID: $id";
     }
 
             public function destroy($id)
     {
-        return "Deleting student with ID: $id";
+        return "Deleting teacher with ID: $id";
     }
 }

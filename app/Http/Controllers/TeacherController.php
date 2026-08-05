@@ -8,12 +8,41 @@ class TeacherController extends Controller
 {
     public function index()
     {
-        return "Displaying teacher list";
+        $title = "Sistem Sekolah - Daftar Kelas";
+        $teachers = [
+            [
+                'id' => 1,
+                'nip' => '198501012024',
+                'name' => 'Budi Santoso',
+                'gender' => 'Laki-Laki',
+                'subject' => 'Akuntansi Dasar',
+                'phone' => '081234560001',
+                'status' => 'Aktif',
+            ],
+            [
+                'id' => 2,
+                'nip' => '198703152024',
+                'name' => 'Siti Aminah',
+                'gender' => 'Perempuan',
+                'subject' => 'Jaringan Komputer',
+                'phone' => '081234560002',
+                'status' => 'Aktif',
+            ]
+        ];
+
+        return view('teachers.index', [
+            'title' => $title,
+            'teachers' => $teachers
+        ]);
     }
 
     public function create()
     {
-        return "Displaying teacher create form";
+        $title = "Sistem Sekolah Tambah Guru";
+
+        return view('teachers.create', [
+            'title' => $title,
+        ]);
     }
     
         public function store()
@@ -23,12 +52,20 @@ class TeacherController extends Controller
 
         public function show($id)
     {
-        return "Displaying teacher with ID: $id";
+        $title = "Sistem Sekolah - Detail Guru";
+
+        return view('teachers.show', [
+            'title' => $title,
+        ]);
     }
 
         public function edit($id)
     {
-        return "Displaying teacher edit form with ID: $id";
+        $title = "Sistem Sekolah - Edit Guru";
+
+        return view('teachers.edit', [
+            'title' => $title,
+        ]);
     }
 
         public function update($id)

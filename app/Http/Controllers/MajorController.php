@@ -6,9 +6,6 @@ use Illuminate\Http\Request;
 
 class MajorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $title = "Sistem Sekolah - Daftar Jurusan";
@@ -34,70 +31,56 @@ class MajorController extends Controller
             ],
         ];
 
-        $title = "Sistem Sekolah Tambah Jurusan";
-
-        return view('majors.create', [
-            'title' => $title,
-        ]);
+        return view('majors.index', compact('title', 'majors'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        $title = "Sistem Sekolah Tambah Jurusan";
+        $title = "Sistem Sekolah - Tambah Jurusan";
 
-        return view('majors.create', [
-            'title' => $title,
-        ]);
+        return view('majors.create', compact('title'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        return "Storing new major";
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show($id)
     {
         $title = "Sistem Sekolah - Detail Jurusan";
 
-        return view('majors.show', [
-            'title' => $title,
-        ]);
+        $major = [
+            'id' => $id,
+            'code' => 'AKL',
+            'name' => 'Akuntansi dan Keuangan Lembaga',
+            'description' => 'Program keahlian yang membekali murid dengan kompetensi pencatatan dan pelaporan keuangan.',
+        ];
+
+        return view('majors.show', compact('title', 'major'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit($id)
     {
         $title = "Sistem Sekolah - Edit Jurusan";
 
-        return view('majors.edit', [
-            'title' => $title,
-        ]);
+        $major = [
+            'id' => $id,
+            'code' => 'AKL',
+            'name' => 'Akuntansi dan Keuangan Lembaga',
+            'description' => 'Program keahlian yang membekali murid dengan kompetensi pencatatan dan pelaporan keuangan.',
+        ];
+
+        return view('majors.edit', compact('title', 'major'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function store(Request $request)
     {
-        return "Updating major with ID: $id";
+        return redirect()->route('majors.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function update(Request $request, $id)
     {
-        return "Deleting major with ID: $id";
+        return redirect()->route('majors.index');
+    }
+
+    public function destroy($id)
+    {
+        return redirect()->route('majors.index');
     }
 }

@@ -5,126 +5,122 @@
 @section('content')
 
 <div class="mb-8 border-b border-[#E5E3DB] pb-5">
-    <a href="{{ route('teachers.index') }}"
+
+    <a href="{{ route('classes.index') }}"
         class="text-xs uppercase tracking-[0.15em] text-slate-400 hover:text-[#A16207]">
-        &larr; Daftar Guru
+        &larr; Daftar Kelas
     </a>
 
     <h1 class="font-display mt-2 text-3xl font-semibold text-[#16213A]">
-        Ubah Data Guru
+        Ubah Data Kelas
     </h1>
 
     <p class="mt-1 text-sm text-slate-500">
-        Memperbarui data guru
-        <span class="font-medium text-[#16213A]">Budi Santoso</span>.
+        Memperbarui data kelas
+        <span class="font-medium text-[#16213A]">
+            {{ $class['name'] }}
+        </span>.
     </p>
+
 </div>
 
-<form action="{{ route('teachers.update', ['id' => 1]) }}" method="POST"
+<form action="{{ route('classes.update', ['id' => $class['id']]) }}"
+    method="POST"
     class="space-y-6 border border-[#E5E3DB] bg-white p-8">
 
     @csrf
     @method('PUT')
 
     <div>
-        <label for="nip"
-            class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
-            NIP
-        </label>
-
-        <input
-            type="text"
-            id="nip"
-            name="nip"
-            value="198501012024"
-            class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
-    </div>
-
-    <div>
         <label for="name"
             class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
-            Nama Lengkap
+            Nama Kelas
         </label>
 
         <input
             type="text"
             id="name"
             name="name"
-            value="Budi Santoso"
+            value="{{ $class['name'] }}"
             class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
     </div>
 
     <div>
-        <label for="gender"
+        <label for="grade"
             class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
-            Jenis Kelamin
+            Tingkat
         </label>
 
         <select
-            id="gender"
-            name="gender"
+            id="grade"
+            name="grade"
             class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
 
-            <option value="Laki-laki" selected>Laki-laki</option>
-            <option value="Perempuan">Perempuan</option>
+            <option value="X" {{ $class['grade'] == 'X' ? 'selected' : '' }}>
+                X
+            </option>
+
+            <option value="XI" {{ $class['grade'] == 'XI' ? 'selected' : '' }}>
+                XI
+            </option>
+
+            <option value="XII" {{ $class['grade'] == 'XII' ? 'selected' : '' }}>
+                XII
+            </option>
 
         </select>
     </div>
 
     <div>
-        <label for="subject"
+        <label for="major_id"
             class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
-            Mata Pelajaran
-        </label>
-
-        <input
-            type="text"
-            id="subject"
-            name="subject"
-            value="Akuntansi Dasar"
-            class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
-    </div>
-
-    <div>
-        <label for="phone_number"
-            class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
-            No. Telepon
-        </label>
-
-        <input
-            type="text"
-            id="phone_number"
-            name="phone_number"
-            value="081234560001"
-            class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
-    </div>
-
-    <div>
-        <label for="status"
-            class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
-            Status
+            Jurusan
         </label>
 
         <select
-            id="status"
-            name="status"
+            id="major_id"
+            name="major_id"
             class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
 
-            <option value="Aktif" selected>Aktif</option>
-            <option value="Tidak Aktif">Tidak Aktif</option>
+            @foreach ($majors as $major)
+                <option value="{{ $major['id'] }}"
+                    {{ $major['code'] == $class['major'] ? 'selected' : '' }}>
+                    {{ $major['code'] }} - {{ $major['name'] }}
+                </option>
+            @endforeach
+
+        </select>
+    </div>
+
+    <div>
+        <label for="teacher_id"
+            class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
+            Wali Kelas
+        </label>
+
+        <select
+            id="teacher_id"
+            name="teacher_id"
+            class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
+
+            @foreach ($teachers as $teacher)
+                <option value="{{ $teacher['id'] }}"
+                    {{ $teacher['name'] == $class['homeroom_teacher'] ? 'selected' : '' }}>
+                    {{ $teacher['name'] }}
+                </option>
+            @endforeach
 
         </select>
     </div>
 
     <div class="flex justify-end gap-4 border-t border-[#EFEDE6] pt-6">
 
-        <a href="{{ route('teachers.index') }}"
+        <a href="{{ route('classes.index') }}"
             class="px-4 py-2.5 text-sm font-medium text-slate-500 hover:text-[#16213A]">
             Batal
         </a>
 
-        <button
-            type="submit"
+        <button type="submit"
             class="bg-[#16213A] px-6 py-2.5 text-sm font-medium text-white transition hover:bg-[#26324f]">
             Perbarui Data
         </button>

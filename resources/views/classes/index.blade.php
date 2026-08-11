@@ -10,14 +10,14 @@
             Tahun Ajaran 2025/2026
         </p>
 
-        <h1 class="font-display text-3xl font-semibold text-[#16213A']">
-            Daftar Guru
+        <h1 class="font-display text-3xl font-semibold text-[#16213A]">
+            Daftar Kelas
         </h1>
     </div>
 
-    <a href="{{ route('teachers.create') }}"
+    <a href="{{ route('classes.create') }}"
         class="bg-[#16213A] px-5 py-2.5 text-sm font-medium text-white transition hover:bg-[#26324f]">
-        Tambah Guru
+        Tambah Kelas
     </a>
 </div>
 
@@ -26,64 +26,54 @@
         <thead>
             <tr class="border-b border-[#16213A] text-[11px] uppercase tracking-[0.15em] text-[#16213A]">
                 <th class="w-14 px-5 py-3.5 font-semibold">No.</th>
-                <th class="px-5 py-3.5 font-semibold">NIP</th>
-                <th class="px-5 py-3.5 font-semibold">Nama Lengkap</th>
-                <th class="px-5 py-3.5 font-semibold">Jenis Kelamin</th>
-                <th class="px-5 py-3.5 font-semibold">Mata Pelajaran</th>
-                <th class="px-5 py-3.5 font-semibold">No. Telepon</th>
-                <th class="px-5 py-3.5 font-semibold">Status</th>
+                <th class="px-5 py-3.5 font-semibold">Nama Kelas</th>
+                <th class="px-5 py-3.5 font-semibold">Tingkat</th>
+                <th class="px-5 py-3.5 font-semibold">Jurusan</th>
+                <th class="px-5 py-3.5 font-semibold">Wali Kelas</th>
                 <th class="px-5 py-3.5 text-right font-semibold">Tindakan</th>
             </tr>
         </thead>
 
         <tbody>
-            @foreach ($teachers as $teacher)
+            @foreach ($classes as $class)
                 <tr class="border-b border-[#EFEDE6] hover:bg-[#FAF9F5]">
 
                     <td class="px-5 py-4 font-display text-lg text-[#A16207]">
                         {{ $loop->iteration }}
                     </td>
 
-                    <td class="px-5 py-4 font-mono text-xs text-slate-500">
-                        {{ $teacher['nip'] }}
-                    </td>
-
                     <td class="px-5 py-4 font-medium text-[#16213A]">
-                        {{ $teacher['name'] }}
+                        {{ $class['name'] }}
                     </td>
 
                     <td class="px-5 py-4">
-                        {{ $teacher['gender'] }}
+                        {{ $class['grade'] }}
                     </td>
 
                     <td class="px-5 py-4">
-                        {{ $teacher['subject'] }}
+                        {{ $class['major'] }}
                     </td>
 
                     <td class="px-5 py-4">
-                        {{ $teacher['phone'] }}
-                    </td>
-
-                    <td class="px-5 py-4">
-                        <x-status-badge :status="$teacher['status']" />
+                        {{ $class['homeroom_teacher'] }}
                     </td>
 
                     <td class="px-5 py-4">
                         <div class="flex justify-end gap-4 text-xs font-medium">
 
-                            <a href="{{ route('teachers.show', ['id' => $teacher['id']]) }}"
+                            <a href="{{ route('classes.show', ['id' => $class['id']]) }}"
                                 class="text-[#16213A] hover:text-[#A16207]">
                                 Lihat
                             </a>
 
-                            <a href="{{ route('teachers.edit', ['id' => $teacher['id']]) }}"
+                            <a href="{{ route('classes.edit', ['id' => $class['id']]) }}"
                                 class="text-[#16213A] hover:text-[#A16207]">
                                 Ubah
                             </a>
 
-                            <form action="{{ route('teachers.destroy', ['id' => $teacher['id']]) }}"
+                            <form action="{{ route('classes.destroy', ['id' => $class['id']]) }}"
                                 method="POST"
-                                onsubmit="return confirm('Hapus data guru ini?')">
+                                onsubmit="return confirm('Hapus data kelas ini?')">
 
                                 @csrf
                                 @method('DELETE')

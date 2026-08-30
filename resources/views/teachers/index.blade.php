@@ -17,27 +17,55 @@
 
     <a href="{{ route('teachers.create') }}"
         class="bg-[#16213A] px-5 py-2.5 text-sm font-medium text-white transition hover:bg-[#26324f]">
-        Tambah Guru
+        Catat Guru Baru
     </a>
 </div>
 
 <div class="border border-[#E5E3DB] bg-white">
     <table class="w-full text-left text-sm">
+
         <thead>
             <tr class="border-b border-[#16213A] text-[11px] uppercase tracking-[0.15em] text-[#16213A]">
-                <th class="w-14 px-5 py-3.5 font-semibold">No.</th>
-                <th class="px-5 py-3.5 font-semibold">NIP</th>
-                <th class="px-5 py-3.5 font-semibold">Nama Lengkap</th>
-                <th class="px-5 py-3.5 font-semibold">Jenis Kelamin</th>
-                <th class="px-5 py-3.5 font-semibold">Mata Pelajaran</th>
-                <th class="px-5 py-3.5 font-semibold">No. Telepon</th>
-                <th class="px-5 py-3.5 font-semibold">Status</th>
-                <th class="px-5 py-3.5 text-right font-semibold">Tindakan</th>
+
+                <th class="w-14 px-5 py-3.5 font-semibold">
+                    No.
+                </th>
+
+                <th class="px-5 py-3.5 font-semibold">
+                    NIP
+                </th>
+
+                <th class="px-5 py-3.5 font-semibold">
+                    Nama Guru
+                </th>
+
+                <th class="px-5 py-3.5 font-semibold">
+                    Jenis Kelamin
+                </th>
+
+                <th class="px-5 py-3.5 font-semibold">
+                    Mata Pelajaran
+                </th>
+
+                <th class="px-5 py-3.5 font-semibold">
+                    No. Telepon
+                </th>
+
+                <th class="px-5 py-3.5 font-semibold">
+                    Status
+                </th>
+
+                <th class="px-5 py-3.5 text-right font-semibold">
+                    Tindakan
+                </th>
+
             </tr>
         </thead>
 
         <tbody>
+
             @foreach ($teachers as $teacher)
+
                 <tr class="border-b border-[#EFEDE6] hover:bg-[#FAF9F5]">
 
                     <td class="px-5 py-4 font-display text-lg text-[#A16207]">
@@ -65,23 +93,24 @@
                     </td>
 
                     <td class="px-5 py-4">
-                    <x-status-badge :status="$teacher['status']" />
+                        <x-status-badge :status="$teacher['status']" />
                     </td>
 
                     <td class="px-5 py-4">
+
                         <div class="flex justify-end gap-4 text-xs font-medium">
 
-                            <a href="{{ route('teachers.show', ['id' => $teacher['id']]) }}"
+                            <a href="{{ route('teachers.show', ['teacher' => $teacher['id']]) }}"
                                 class="text-[#16213A] hover:text-[#A16207]">
                                 Lihat
                             </a>
 
-                            <a href="{{ route('teachers.edit', ['id' => $teacher['id']]) }}"
+                            <a href="{{ route('teachers.edit', ['teacher' => $teacher['id']]) }}"
                                 class="text-[#16213A] hover:text-[#A16207]">
                                 Ubah
                             </a>
 
-                            <form action="{{ route('teachers.destroy', ['id' => $teacher['id']]) }}"
+                            <form action="{{ route('teachers.destroy', ['teacher' => $teacher['id']]) }}"
                                 method="POST"
                                 onsubmit="return confirm('Hapus data guru ini?')">
 
@@ -96,11 +125,15 @@
                             </form>
 
                         </div>
+
                     </td>
 
                 </tr>
+
             @endforeach
+
         </tbody>
+
     </table>
 </div>
 

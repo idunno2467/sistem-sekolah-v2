@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -41,7 +42,7 @@ class StudentController extends Controller
 
     public function create()
     {
-        $title = "Sistem Sekolah Tambah Siswa";
+        $title = "Sistem Sekolah - Tambah Siswa";
 
         return view('students.create', [
             'title' => $title,

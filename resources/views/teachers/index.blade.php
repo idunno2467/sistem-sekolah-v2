@@ -10,7 +10,7 @@
             Tahun Ajaran 2025/2026
         </p>
 
-        <h1 class="font-display text-3xl font-semibold text-[#16213A']">
+        <h1 class="font-display text-3xl font-semibold text-[#16213A]">
             Daftar Guru
         </h1>
     </div>
@@ -65,7 +65,7 @@
                     </td>
 
                     <td class="px-5 py-4">
-                        <x-status-badge :status="$teacher['status']" />
+                    <x-status-badge :status="$teacher['status']" />
                     </td>
 
                     <td class="px-5 py-4">

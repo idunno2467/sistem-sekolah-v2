@@ -8,7 +8,7 @@ class TeacherController extends Controller
 {
     public function index()
     {
-        $title = "Sistem Sekolah - Daftar Kelas";
+        $title = "Sistem Sekolah - Daftar Guru";
         $teachers = [
         [
             'id' => 1,
@@ -72,9 +72,17 @@ class TeacherController extends Controller
     {
         $title = "Sistem Sekolah - Edit Guru";
 
-        return view('teachers.edit', [
-            'title' => $title,
-        ]);
+        $teacher = [
+            'id' => $id,
+            'nip' => '198501012024',
+            'name' => 'Budi Santoso',
+            'gender' => 'Laki-Laki',
+            'subject' => 'Akuntansi Dasar',
+            'phone' => '081234560001',
+            'status' => 'Aktif',
+        ];
+
+        return view('teachers.edit', compact('title', 'teacher'));
     }
 
         public function update($id)

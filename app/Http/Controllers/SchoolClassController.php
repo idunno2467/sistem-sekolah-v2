@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 class SchoolClassController extends Controller
-
 {
     public function index()
     {
@@ -35,36 +34,12 @@ class SchoolClassController extends Controller
     {
         $title = "Sistem Sekolah - Tambah Kelas";
 
-        $majors = [
-            [
-                'id' => 1,
-                'code' => 'AKL',
-                'name' => 'Akuntansi dan Keuangan Lembaga',
-            ],
-            [
-                'id' => 2,
-                'code' => 'TKJ',
-                'name' => 'Teknik Komputer dan Jaringan',
-            ],
-            [
-                'id' => 3,
-                'code' => 'BD',
-                'name' => 'Bisnis Digital',
-            ],
-        ];
+        return view('classes.create', compact('title'));
+    }
 
-        $teachers = [
-            [
-                'id' => 1,
-                'name' => 'Budi Santoso',
-            ],
-            [
-                'id' => 2,
-                'name' => 'Siti Aminah',
-            ],
-        ];
-
-        return view('classes.create', compact('title', 'majors', 'teachers'));
+    public function store(Request $request)
+    {
+        return "Data kelas berhasil disimpan";
     }
 
     public function show($id)
@@ -94,53 +69,16 @@ class SchoolClassController extends Controller
             'homeroom_teacher' => 'Budi Santoso'
         ];
 
-        $majors = [
-            [
-                'id' => 1,
-                'code' => 'AKL',
-                'name' => 'Akuntansi dan Keuangan Lembaga',
-            ],
-            [
-                'id' => 2,
-                'code' => 'TKJ',
-                'name' => 'Teknik Komputer dan Jaringan',
-            ],
-            [
-                'id' => 3,
-                'code' => 'BD',
-                'name' => 'Bisnis Digital',
-            ],
-        ];
-
-        $teachers = [
-            [
-                'id' => 1,
-                'name' => 'Budi Santoso',
-            ],
-            [
-                'id' => 2,
-                'name' => 'Siti Aminah',
-            ],
-        ];
-
-        return view(
-            'classes.edit',
-            compact('title', 'class', 'majors', 'teachers')
-        );
-    }
-
-    public function store(Request $request)
-    {
-        return redirect()->route('classes.index');
+        return view('classes.edit', compact('title', 'class'));
     }
 
     public function update(Request $request, $id)
     {
-        return redirect()->route('classes.index');
+        return "Data kelas berhasil diperbarui";
     }
 
     public function destroy($id)
     {
-        return redirect()->route('classes.index');
+        return "Data kelas berhasil dihapus";
     }
 }

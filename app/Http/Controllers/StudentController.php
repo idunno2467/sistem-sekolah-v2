@@ -49,9 +49,14 @@ class StudentController extends Controller
         ]);
     }
     
-        public function store()
+        public function store(Request $request)
     {
-        return "Storing new student";
+        //Validasi
+        $request->validate([
+        'nis'=>['required', 'string', 'size:4', 'unique:students,nis'],
+        'name'=>['required', 'string'],
+        'gender'=>['required', 'string'],
+        ]);
     }
 
         public function show($id)

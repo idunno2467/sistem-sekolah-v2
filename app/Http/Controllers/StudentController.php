@@ -11,7 +11,8 @@ class StudentController extends Controller
     public function index()
     {
         $title = "Sistem Sekolah - Daftar Siswa";
-        $students = Student::all();
+        $students = Student::select(['id', 'nis', 'name', 'class', 'major'])
+            ->get();
 
         return view('students.index', [
             'title' => $title,
@@ -46,12 +47,14 @@ class StudentController extends Controller
         return redirect()->route('students.index');
     }
 
-        public function show($id)
+        public function show(string $id)
     {
         $title = "Sistem Sekolah - Detail Siswa";
+        $student = Student::find($id);
 
         return view('students.show', [
             'title' => $title,
+            'student' => $student
         ]);
     }
 

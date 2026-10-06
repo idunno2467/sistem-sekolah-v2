@@ -29,16 +29,10 @@ class StudentController extends Controller
         ]);
     }
     
-        public function store(Request $request)
+        public function store(StoreRequest $request)
     {
         //Validasi
-        $valiatedrequest = $request->validate([
-        'nis'=>['required', 'string', 'size:4', 'unique:students,nis'],
-        'name'=>['required', 'string'],
-        'gender'=>['required', 'string', 'in:Laki-laki,Perempuan'],
-        'major'=>['required', 'string', 'in:AKL,TKJ,BiD'],
-        'class'=>['required', 'string']
-        ]);
+        $valiatedrequest = $request->validated();
 
         //Tambahkan Data ke Database
         Student::create($valiatedrequest);
@@ -47,10 +41,10 @@ class StudentController extends Controller
         return redirect()->route('students.index');
     }
 
-        public function show(string $id)
+
+        public function show(Student $student)
     {
         $title = "Sistem Sekolah - Detail Siswa";
-        $student = Student::find($id);
 
         return view('students.show', [
             'title' => $title,
@@ -58,22 +52,40 @@ class StudentController extends Controller
         ]);
     }
 
-        public function edit($id)
+        public function edit(Student $student)
     {
         $title = "Sistem Sekolah - Edit Siswa";
 
         return view('students.edit', [
             'title' => $title,
+            'student' => $student
         ]);
     }
 
-        public function update($id)
+        public function update(Student $student, Request $request, $id)
     {
-        return "Updating student with ID: $id";
+        //Validasi
+        $valiatedrequest = $request->validate([
+        'nis'=>['required', 'string', 'size:4', 'unique:students,nis,' . $student->id],
+        'name'=>['required', 'string'],
+        'gender'=>['required', 'string', 'in:Laki-laki,Perempuan'],
+        'major'=>['required', 'string', 'in:AKL,TKJ,BiD'],
+        'class'=>['required', 'string']
+        ]);
+
+        //Update Data
+        $student->update($valiatedrequest);
+
+        //Handle If Success
+        return redirect()->route('students.index');
     }
 
-            public function destroy($id)
+            public function destroy(Student $student)
     {
-        return "Deleting student with ID: $id";
+        //Delete Data
+        $student->delete();
+
+        //Handle If Success
+        return redirect()->route('students.index');
     }
 }

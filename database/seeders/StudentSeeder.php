@@ -13,11 +13,6 @@ class StudentSeeder extends Seeder
      */
     public function run(): void
     {
-        $students = [
-            ['nis' => '1234', 'name' => 'Michelle Nathaliu', 'gender' => 'Perempuan', 'class' => 'XII TKJ 3', 'major' => 'TKJ'],
-            ['nis' => '1233', 'name' => 'Michelle Nathaliu 123', 'gender' => 'Perempuan', 'class' => 'XII AKL', 'major' => 'AKL'],
-        ];
-
-        Student::upsert($students, ['nis'], ['name', 'gender', 'class', 'major']);
+        Student::factory()->count(100)->create();
     }
 }

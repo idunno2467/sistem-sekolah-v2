@@ -1,5 +1,6 @@
 <?php
  
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
  
 use App\Http\Controllers\TeacherController;
@@ -38,7 +39,12 @@ Route::name('students.')->prefix('students')->group(function () {
         Route::delete('/{student}', [StudentController::class, 'destroy'])->name('destroy');
     });
  
- 
+//Authentication
+Route::get('/login', [AuthController::class, 'loginView'])->name('login-view');
+Route::get('/login', [AuthController::class, 'loginPost'])->name('login-post');
+Route::get('/register', [AuthController::class, 'registerView'])->name('register-view');
+Route::get('/register', [AuthController::class, 'registerPost'])->name('register-post');
+
 // SchoolClass - Invokable Controllers
 Route::name('classes.')->prefix('classes')->group(function () {
         Route::get('/', ClassIndexController::class)->name('index');

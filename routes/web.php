@@ -29,7 +29,7 @@ Route::name('teachers.')->prefix('teachers')->group(function () {
  
  
 // Student
-Route::name('students.')->prefix('students')->group(function () {
+Route::name('students.')->middleware('role:student,teacher')->prefix('students')->group(function () {
         Route::get('/', [StudentController::class, 'index'])->name('index');
         Route::get('/create', [StudentController::class, 'create'])->name('create');
         Route::post('/', [StudentController::class, 'store'])->name('store');
@@ -41,9 +41,10 @@ Route::name('students.')->prefix('students')->group(function () {
  
 //Authentication
 Route::get('/login', [AuthController::class, 'loginView'])->name('login-view');
-Route::get('/login', [AuthController::class, 'loginPost'])->name('login-post');
+Route::post('/login', [AuthController::class, 'loginPost'])->name('login-post');
 Route::get('/register', [AuthController::class, 'registerView'])->name('register-view');
-Route::get('/register', [AuthController::class, 'registerPost'])->name('register-post');
+Route::post('/register', [AuthController::class, 'registerPost'])->name('register-post');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // SchoolClass - Invokable Controllers
 Route::name('classes.')->prefix('classes')->group(function () {

@@ -17,7 +17,7 @@ use App\Http\Controllers\SchoolClass\DestroyController as ClassDestroyController
  
  
 // Teacher
-Route::name('teachers.')->prefix('teachers')->group(function () {
+Route::name('teachers.')->middleware('role:teacher')->prefix('teachers')->group(function () {
         Route::get('/', [TeacherController::class, 'index'])->name('index');
         Route::get('/create', [TeacherController::class, 'create'])->name('create');
         Route::post('/', [TeacherController::class, 'store'])->name('store');
@@ -47,7 +47,7 @@ Route::post('/register', [AuthController::class, 'registerPost'])->name('registe
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // SchoolClass - Invokable Controllers
-Route::name('classes.')->prefix('classes')->group(function () {
+Route::name('classes.')->middleware('role:teacher')->prefix('classes')->group(function () {
         Route::get('/', ClassIndexController::class)->name('index');
         Route::get('/create', ClassCreateController::class)->name('create');
         Route::post('/', ClassStoreController::class)->name('store');
@@ -59,5 +59,5 @@ Route::name('classes.')->prefix('classes')->group(function () {
  
  
 // Major
-Route::resource('majors', MajorController::class);
+Route::resource('majors', MajorController::class)->middleware('role:teacher');
  

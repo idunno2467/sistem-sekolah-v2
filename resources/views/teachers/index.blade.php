@@ -100,17 +100,17 @@
 
                         <div class="flex justify-end gap-4 text-xs font-medium">
 
-                            <a href="{{ route('teachers.show', ['teacher' => $teacher['id']]) }}"
+                            <a href="{{ route('teachers.show', ['id' => $teacher['id']]) }}"
                                 class="text-[#16213A] hover:text-[#A16207]">
                                 Lihat
                             </a>
 
-                            <a href="{{ route('teachers.edit', ['teacher' => $teacher['id']]) }}"
+                            <a href="{{ route('teachers.edit', ['id' => $teacher['id']]) }}"
                                 class="text-[#16213A] hover:text-[#A16207]">
                                 Ubah
                             </a>
 
-                            <form action="{{ route('teachers.destroy', ['teacher' => $teacher['id']]) }}"
+                            <form action="{{ route('teachers.destroy', ['id' => $teacher['id']]) }}"
                                 method="POST"
                                 onsubmit="return confirm('Hapus data guru ini?')">
 

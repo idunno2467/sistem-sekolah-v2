@@ -13,11 +13,13 @@ class CheckByRole
      *
      * @param  Closure(Request): (Response)  $next
      */
-    public function handle(Request $request, Closure $next, $roles): Response
+    public function handle(Request $request, Closure $next, ...$roles): Response
     {
-        print_r($roles);
-        exit;
         $user = auth()->user();
+        
+        if(!in_array($user->role, $roles)) {
+            abort(403, 'Anda tidak punya akses ke halaman ini');
+        }
 
         return $next($request);
     }

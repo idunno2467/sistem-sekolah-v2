@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('students', function (Blueprint $table) {
-            if(Schema::hasColumn('student', 'user_id')) {
+            if(!Schema::hasColumn('students', 'user_id')) {
                 $table->foreignId('user_id')
                     ->unique()
                     ->after('id')
@@ -27,7 +27,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('students', function (Blueprint $table) {
-            if(Schema::hasColumn('student', 'user_id')) {
+            if(Schema::hasColumn('students', 'user_id')) {
                 $table->dropForeign(['user_id']);
                 $table->dropColumn('user_id');
             }

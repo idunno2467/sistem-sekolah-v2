@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('students', function (Blueprint $table) {
-            if(Schema::hasColumn('student', 'major_id')) {
+            if(!Schema::hasColumn('students', 'major_id')) {
                 $table->foreignId('major_id')
                 ->after('user_id')
                 ->constrained('majors');
             }
-            if(Schema::hasColumn('student', 'class_id')) {
+            if(Schema::hasColumn('students', 'class_id')) {
                 $table->foreignId('class_id')
                 ->after('major_id')
                 ->constrained('classes');
@@ -31,11 +31,11 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('students', function (Blueprint $table) {
-            if(Schema::hasColumn('student', 'major_id')) {
+            if(Schema::hasColumn('students', 'major_id')) {
                 $table->dropForeign('major_id');
                 $table->dropColumn('major_id');
             }
-            if(Schema::hasColumn('student', 'class_id')) {
+            if(Schema::hasColumn('students', 'class_id')) {
                 $table->dropForeign('class_id');
                 $table->dropColumn('class_id');
             }

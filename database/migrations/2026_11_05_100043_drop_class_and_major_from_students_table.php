@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('students', function (Blueprint $table) {
-            if(!Schema::hasColumn('students', 'class')) {
+            if(Schema::hasColumn('students', 'class')) {
                 $table->dropColumn('class');
             }
             if(Schema::hasColumn('students', 'major')) {
@@ -27,11 +27,11 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('students', function (Blueprint $table) {
-            if(Schema::hasColumn('students', 'class')) {
-                $table->string('class')->after('major');
-            }
-            if(Schema::hasColumn('students', 'major')) {
+            if(!Schema::hasColumn('students', 'major')) {
                 $table->string('major')->after('gender');
+            }
+            if(!Schema::hasColumn('students', 'class')) {
+                $table->string('class')->after('major');
             }
         });
     }

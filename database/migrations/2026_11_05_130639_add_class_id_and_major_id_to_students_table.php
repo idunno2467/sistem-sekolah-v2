@@ -17,7 +17,7 @@ return new class extends Migration
                 ->after('user_id')
                 ->constrained('majors');
             }
-            if(Schema::hasColumn('students', 'class_id')) {
+            if(!Schema::hasColumn('students', 'class_id')) {
                 $table->foreignId('class_id')
                 ->after('major_id')
                 ->constrained('classes');
@@ -31,7 +31,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('students', function (Blueprint $table) {
-            if(Schema::hasColumn('students', 'major_id')) {
+            if(!Schema::hasColumn('students', 'major_id')) {
                 $table->dropForeign('major_id');
                 $table->dropColumn('major_id');
             }
